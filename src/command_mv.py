@@ -14,9 +14,9 @@ def function_mv(command):
         # Проверка минимального количества аргументов
         if len(list_command) < 3:
             log(
-                command, no_mistake=False, name_error='ERROR: Неправильный формат ввода'
+                command, no_mistake=False, name_error="ERROR: Неправильный формат ввода"
             )
-            return f'{date_time()} ERROR: Неправильный формат ввода'
+            return f"{date_time()} ERROR: Неправильный формат ввода"
 
         # Нормализация путей источника и назначения
         normpath_for_source = os.path.normpath(os.path.expanduser(list_command[1]))
@@ -27,15 +27,15 @@ def function_mv(command):
             log(
                 command,
                 no_mistake=False,
-                name_error=f'ERROR: Источник {list_command[1]} не найден',
+                name_error=f"ERROR: Источник {list_command[1]} не найден",
             )
-            return f'{date_time()} ERROR: Источник {list_command[1]} не найден'
+            return f"{date_time()} ERROR: Источник {list_command[1]} не найден"
 
         # Проверка на права доступа к файлу/каталогу
         try:
             # Проверка, можем ли мы прочитать этот файл
             if os.path.isfile(normpath_for_source):
-                with open(normpath_for_source, 'rb') as f:
+                with open(normpath_for_source, "rb") as f:
                     f.read(1)  # для проверки достаточно прочитать первый байт файла
             elif os.path.isdir(normpath_for_source):
                 # Пробуем получить список файлов директории
@@ -44,9 +44,9 @@ def function_mv(command):
             log(
                 command,
                 no_mistake=False,
-                name_error='ERROR: Нет прав доступа для чтения источника',
+                name_error="ERROR: Нет прав доступа для чтения источника",
             )
-            return f'{date_time()} ERROR: Нет прав доступа для чтения источника'
+            return f"{date_time()} ERROR: Нет прав доступа для чтения источника"
 
         # Определяем конечный путь назначения
         if os.path.isdir(normpath_for_destination):
@@ -65,9 +65,9 @@ def function_mv(command):
             log(
                 command,
                 no_mistake=False,
-                name_error='ERROR: Невозможно переместить файл в самого себя',
+                name_error="ERROR: Невозможно переместить файл в самого себя",
             )
-            return f'{date_time()} ERROR: Невозможно переместить файл в самого себя'
+            return f"{date_time()} ERROR: Невозможно переместить файл в самого себя"
 
         try:
             # Перемещение файла или каталога
@@ -79,12 +79,12 @@ def function_mv(command):
             log(
                 command,
                 no_mistake=False,
-                name_error='ERROR: Нет прав доступа для перемещения',
+                name_error="ERROR: Нет прав доступа для перемещения",
             )
-            return f'{date_time()} ERROR: Нет прав доступа для перемещения'
+            return f"{date_time()} ERROR: Нет прав доступа для перемещения"
         except Exception as error:
-            log(command, no_mistake=False, name_error=f'ERROR: {str(error)}')
-            return f'{date_time()} ERROR: {str(error)}'
+            log(command, no_mistake=False, name_error=f"ERROR: {str(error)}")
+            return f"{date_time()} ERROR: {str(error)}"
     except Exception as error:
-        log(command, no_mistake=False, name_error=f'ERROR: {str(error)}')
-        return f'{date_time()} ERROR: {str(error)}'
+        log(command, no_mistake=False, name_error=f"ERROR: {str(error)}")
+        return f"{date_time()} ERROR: {str(error)}"

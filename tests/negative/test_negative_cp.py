@@ -2,9 +2,9 @@ import os
 import sys
 import tempfile
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
-
 from src.command_cp import function_cp
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
 
 def test_cp_nonexistent_source():
