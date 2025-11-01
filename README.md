@@ -13,18 +13,29 @@ Python_Laba_2/
 │   ├── command_cd.py           # Команда cd - смена директории
 │   ├── command_cp.py           # Команда cp - копирование
 │   ├── command_mv.py           # Команда mv - перемещение
-│   ├── DateTime.py             # Утилиты для работы с датой/временем
+│   ├── command_grep.py         # Команда grep - поиск по содержимому
+│   ├── DateTime.py             # Функция для работы с датой/временем
 │   ├── logging_in_shell.py     # Система логирования
 │   └── shell.log               # Файл логов (создается автоматически)
 ├── tests/                      # Тесты
-│   ├── test_cat.py
-│   ├── test_cd.py
-│   ├── test_cp.py
-│   ├── test_ls.py
-│   ├── test_mv.py
-│   ├── test_rm.py
-│   ├── test_main.py
-│   └── __init__.py
+│   ├── positive/
+│   │   ├── test_positive_cat.py
+│   │   ├── test_positive_cd.py
+│   │   ├── test_positive_cp.py
+│   │   ├── test_positive_ls.py
+│   │   ├── test_positive_mv.py
+│   │   ├── test_positive_rm.py
+│   │   ├── test_positive_grep.py
+│   │   └── __init__.py
+│   └── negative/
+│       ├── test_negative_cat.py
+│       ├── test_negative_cd.py
+│       ├── test_negative_cp.py
+│       ├── test_negative_ls.py
+│       ├── test_negative_mv.py
+│       ├── test_negative_rm.py
+│       ├── test_negative_grep.py
+│       └── __init__.py
 ├── .gitignore
 ├── .pre-commit-config.yaml     # Настройки pre-commit хуков
 ├── pyproject.toml              # Конфигурация проекта
@@ -135,7 +146,7 @@ rm /
 ERROR: Нельзя удалять корневой каталог
 
 rm ..
-ERROR: Нельзя удалять родительский каталог  
+ERROR: Нельзя удалять родительский каталог
 
 rm .
 ERROR: Нельзя удалять текущий каталог
@@ -213,7 +224,7 @@ cp file.txt backup.txt
 cp "file with spaces.txt" "backup file.txt"
 cp file.txt /backup/folder/
 
-# Рекурсивное копирование каталогов  
+# Рекурсивное копирование каталогов
 cp -r folder backup_folder
 cp -r "source folder" "destination folder"
 
@@ -281,6 +292,37 @@ mv file.txt
 ERROR: Неправильный формат ввода
 ```
 
+
+#### 7) Команда grep - поиск по содержимому файлов
+Формат ввода: `grep [-r] [-i] [pattern] [parh]`
+
+Опции:
+
+`-r` - рекурсивный поиск по подкаталогам
+
+`-i` - поиск без учёта регистра
+
+`-ri` или `-ir` - комбинированные опции
+
+##### Примеры использования
+```
+# Простой поиск в файле
+grep "привет" file.txt
+
+# Поиск без учета регистра
+grep -i "hello" document.txt
+
+# Рекурсивный поиск в папке
+grep -r "функция" src/
+
+# Комбинированный поиск
+grep -ri "ошибка" project/
+
+# Поиск в текущей директории
+grep "TODO" .
+```
+
+
 ### Особенности работы кода:
 ##### Логирование операций:
 Все выполняемые команды и возникающие ошибки автоматически записываются в файл src/shell.log
@@ -299,6 +341,7 @@ ERROR: Неправильный формат ввода
     ```
     1) cd Python_Laba_2
     2) cd src
+    3) Python3 -m main
     ```
  3) Либо (Вариант 2):
  ```Python3 -m src.main```
