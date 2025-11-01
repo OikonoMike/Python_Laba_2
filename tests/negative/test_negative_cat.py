@@ -2,10 +2,9 @@ import os
 import sys
 import tempfile
 
-# Добавляем путь к src для импорта
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
-
 from src.command_cat import function_cat
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
 
 def test_cat_file_not_found():

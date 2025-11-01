@@ -2,9 +2,9 @@ import os
 import sys
 import tempfile
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
-
 from src.command_ls import function_ls
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
 
 def test_ls_nonexistent_path():
