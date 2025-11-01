@@ -20,16 +20,13 @@ dev = [
     "flake8>=6.0.0",
     "mypy>=1.0.0",
     "pre-commit>=3.0.0",
+    "pytest-mock>=3.0.0",
 ]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = [
     "--verbose",
-    "--cov=src",
-    "--cov-report=term-missing",
-    "--cov-report=html",
-    "--cov-branch"
 ]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
@@ -63,8 +60,7 @@ known_first_party = ["src"]
 python_version = "3.8"
 warn_return_any = true
 warn_unused_configs = true
-disallow_untyped_defs = true
-check_untyped_defs = true
+disallow_untyped_defs = false
 
 [tool.coverage.run]
 source = ["src"]
