@@ -7,6 +7,8 @@ from .command_cp import function_cp
 from .command_ls import function_ls
 from .command_mv import function_mv
 from .command_rm import function_rm
+from .command_grep import function_grep
+from .logging_in_shell import log
 from .DateTime import date_time
 
 
@@ -21,6 +23,7 @@ def main():
             "mv",
             "cp",
             "rm",
+            "grep",
         ]  # список из команд, поддерживаемых этой программой
         while command != "exit":  # для выхода из программы нужно будет вписать exit
             try:
@@ -49,7 +52,11 @@ def main():
                         cat = function_cat(command)
                         print(cat)  # выводим содержимое, либо ошибку
                     elif first_command == "mv":
-                        print(function_mv(command))
+                        mv = function_mv(command)
+                        if (
+                            mv is not None
+                        ): # если не ошибка, то продолжаем вводить команды
+                            print(mv) # если ошибка, то выводим ошибку
                     elif first_command == "rm":
                         rm = function_rm(command)
                         if (
@@ -62,15 +69,25 @@ def main():
                             cp is not None
                         ):  # если не ошибка, то продолжаем вводить команды
                             print(cp)  # если ошибка, то выводим ошибку
+                    elif first_command == "grep":
+                        grep = function_grep(command)
+                        if (
+                            grep is not None
+                        ): # если не ошибка, то продолжаем вводить команды
+                            print(grep) # если ошибка, то выводим ошибку
                 else:
                     print(date_time(), "ERROR: Неизвестная команда")
+                    # Логируем неизвестную команду
+                    log(command, no_mistake=False, name_error='ERROR: Неизвестная команда')
                 command = input(f"{os.getcwd()}> ").rstrip()
             except KeyboardInterrupt:
                 break
             except Exception as error:
                 print(f"{date_time()} ERROR: {str(error)}")
+                log(command, no_mistake=False, name_error=f"ERROR: {str(error)}")
     except Exception as error:
         print(f"{date_time()} ERROR: {str(error)}")
+        log("main", no_mistake=False, name_error=f"ERROR: {str(error)}")
 
 
 if __name__ == "__main__":
